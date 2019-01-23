@@ -14,12 +14,11 @@
 
 PRE="http://"
 SUFF="/admin/reboot"
-arp |egrep '00:18:f8|00:18:39|00:14:bf'| {
+cat /proc/net/arp |egrep '00:18:f8|00:18:39|00:14:bf'| {
   while read line
   do
-  	FIRST=`echo "$line" | awk '{ print $1 }'`
-  	wget $PRE$FIRST$SUFF
-  	
+  	IP=`echo "$line" | awk '{ print $1 }'`
+  	wget $PRE$IP$SUFF
   done
  }
 
